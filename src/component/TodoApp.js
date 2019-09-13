@@ -1,8 +1,8 @@
-import App from "./App";
+import App from "../App";
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { TodoList } from './TodoList';
+import { TodoList } from '../TodoList';
 import moment from "moment";
 
 import Avatar from '@material-ui/core/Avatar';
