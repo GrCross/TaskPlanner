@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {TodoList} from './TodoList';
+import {TodoList} from './component/TodoList';
 
 import {Login} from './component/Login.js';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
