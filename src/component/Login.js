@@ -17,10 +17,38 @@ export class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        localStorage.setItem("admin", "4dm1n");
-        this.state = {user: "", password: "", userExist: false, userPasswordMatch: false}
-        this.handlerChange = this.handlerChange.bind(this);
-        this.handlerLogIn = this.handlerLogIn.bind(this);
+        this.state = {
+            email: "",
+            password: "",
+            isLoggedIn: false,
+            path: "/"
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEmail = this.handleEmail.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
+    }
+
+    handleEmail(e) {
+        this.setState({ email: e.target.value });
+    }
+
+    handlePassword(e) {
+        this.setState({ password: e.target.value });
+    }
+
+    async handleSubmit(e){
+        e.preventDefault()
+        var email = this.state.email.trim();
+        var password = this.state.password.trim();
+        if(!email || !password){
+            return;
+        }
+        if (localStorage.getItem("email") === email && localStorage.getItem("password") === password) {
+
+            await this.setState({ isLoggedIn: true });
+            await this.setState({ path: "/home" });
+            localStorage.setItem("isLoggedIn", this.state.isLoggedIn);
+        }
     }
 
 
@@ -28,7 +56,7 @@ export class Login extends React.Component {
         return (
             <React.Fragment>
                 <CssBaseline/>
-                <main className="layout">
+                <main className="layout" >
 
                     <Paper className="paper">
                         <Avatar className="avatar">
@@ -38,8 +66,8 @@ export class Login extends React.Component {
                         <form className="form" onSubmit={this.handlerLogIn}>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
-                                <Input id="email" name="email" autoComplete="email" value={this.state.user}
-                                       onChange={this.handlerChange} autoFocus/>
+                                <Input id="email" name="email" autoComplete="email" value={this.state.email}
+                                       onChange={this.handleEmail} autoFocus/>
                             </FormControl>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="password">Password</InputLabel>
@@ -49,17 +77,14 @@ export class Login extends React.Component {
                                     id="password"
                                     autoComplete="current-password"
                                     value={this.state.password}
-                                    onChange={this.handlerChange}
+                                    onChange={this.handlePassword}
                                 />
                             </FormControl>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="raised"
-                                color="primary"
-                                className="submit"
-                            >
-                                Sign in
+                            <Button  onClick={this.handleSubmit} fullWidth variant="raised" color="primary">
+                                <Link style={{ color: 'black' }} to={{pathname: this.state.path}}>
+                                    Sign in
+                                </Link>
+
                             </Button>
                         </form>
                     </Paper>
@@ -67,30 +92,4 @@ export class Login extends React.Component {
             </React.Fragment>
         );
     }
-
-    handlerChange(e) {
-        if (e.target.id === "email") {
-            this.setState({user: e.target.value});
-        } else if (e.target.id === "password") {
-            this.setState({password: e.target.value});
-        }
-    }
-
-    handlerLogIn(e) {
-        event.preventDefault();
-        console.log(this.state);
-        const userPassword = localStorage.getItem(this.state.user);
-        console.log("holaa");
-        console.log(userPassword);
-        if (userPassword === null) {
-            localStorage.setItem("isLoggedIn", "false");
-        } else {
-            if (this.state.password === userPassword) {
-                localStorage.setItem("isLoggedIn", "true");
-            }else localStorage.setItem("isLoggedIn", "false");
-        }
-
-    }
-
-
 }

@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "moment": "^2.24.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "0.9.5",
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
     "@material-ui/pickers": "3.2.4",
-    "react-router-dom": "^4.3.1"
+    "clsx": "^1.0.4",
+    "mdbreact": "^4.19.2",
+    "moment": "^2.24.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-floating-button-menu": "^2.0.4",
+    "react-icons": "^3.7.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "0.9.5"
   },
   "devDependencies": {},
   "scripts": {

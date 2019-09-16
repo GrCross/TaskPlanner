@@ -1,22 +1,31 @@
 import App from "../App";
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import '../App.css';
 import { TodoList } from './TodoList';
 import moment from "moment";
 
+import AddIcon from '@material-ui/icons/Add';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import LockIcon from '@material-ui/icons/LockOutlined';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
+import "../css/Todo.scss"
 
-import './component/Login.css'
+import {
+    FloatingMenu,
+    MainButton,
+    ChildButton,
+} from 'react-floating-button-menu';
+
+import './Login.css'
+import {TodoCardList} from "./TodoCardList";
+import {MDBBtn, MDBContainer, MDBIcon, MDBModal, MDBModalBody, MDBModalFooter, MDBModalHeader} from "mdbreact";
+import Fab from "@material-ui/core/Fab";
 class TodoApp extends React.Component {
     constructor(props) {
         super(props);
@@ -25,54 +34,77 @@ class TodoApp extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    
+    state = {
+        modal6: false,
+        modal7: false
+    }
+
+    toggle = nr => () => {
+        let modalNumber = 'modal' + nr
+        this.setState({
+            [modalNumber]: !this.state[modalNumber]
+        });
+    }
+
+
 
     render() {
         return (
             <React.Fragment>
                 <CssBaseline />
                 <main className="layout">
+                    <MDBContainer>
+                        <MDBContainer className="container">
+                            <Fab onClick={this.toggle(8)} style={{position: "absolute", left:"78%",bottom:"5%",zIndex:"10"}} color="primary" aria-label="add">
+                                <AddIcon />
+                            </Fab>
+                        </MDBContainer>
 
-
-                    <Paper className="paper">
-                        <Typography variant="headline">Todo</Typography>
-                        <form onSubmit={this.handleSubmit}>
-                            <FormControl margin="normal" fullWidth>
-                                <label htmlFor="new-todo-Text">
-                                    Text:
-                                </label>
-                                <TextField
-                                    id="new-todo-text"
-                                    onChange={this.handleChange}
-                                    value={this.state.text}/>
-                            </FormControl>
-                            <FormControl margin="normal" fullWidth>
-                                <label htmlFor="new-todo-Priority">
-                                    Priority:
-                                </label>
-                                <TextField
-                                    id="new-todo-priority"
-                                    onChange={this.handleChange}
-                                    value={this.state.priority}
-                                    type="number"/>
-                            </FormControl>
-                            <FormControl margin="normal" fullWidth>
-                                <label htmlFor="new-todo-dueDate2">
-                                    dueDate:
-                                </label>
-                                <TextField
-                                    id="new-todo-dueDate"
-                                    onChange={this.handleChange}
-                                    value={this.state.dueDate}
-                                    type="date"/>
-                            </FormControl>
-                            <Button type='submit'>
-                                Add #{this.state.items.length + 1}
-                            </Button>
-                        </form>
-                    </Paper>
-                    <div></div>
-                        <TodoList items= {this.state.items}/>
+                        <MDBModal isOpen={this.state.modal8} toggle={this.toggle(8)} fullHeight position="100%">
+                            <MDBModalHeader toggle={this.toggle(8)}>Create your TODO</MDBModalHeader>
+                            <MDBModalBody>
+                                <form >
+                                    <FormControl margin="normal" fullWidth>
+                                        <label htmlFor="new-todo-Text">
+                                            Text:
+                                        </label>
+                                        <TextField
+                                            id="new-todo-text"
+                                            onChange={this.handleChange}
+                                            value={this.state.text}/>
+                                    </FormControl>
+                                    <FormControl margin="normal" fullWidth>
+                                        <label htmlFor="new-todo-Priority">
+                                            Priority:
+                                        </label>
+                                        <TextField
+                                            id="new-todo-priority"
+                                            onChange={this.handleChange}
+                                            value={this.state.priority}
+                                            type="number"/>
+                                    </FormControl>
+                                    <FormControl margin="normal" fullWidth>
+                                        <label htmlFor="new-todo-dueDate2">
+                                            dueDate:
+                                        </label>
+                                        <TextField
+                                            id="new-todo-dueDate"
+                                            onChange={this.handleChange}
+                                            value={this.state.dueDate}
+                                            type="date"/>
+                                    </FormControl>
+                                    <Button type='submit'>
+                                        Add #{this.state.items.length + 1}
+                                    </Button>
+                                </form>
+                            </MDBModalBody>
+                            <MDBModalFooter>
+                                <MDBBtn color="secondary" onClick={this.toggle(8)}>Close</MDBBtn>
+                                <MDBBtn onClick={this.handleSubmit} color="primary">Save changes</MDBBtn>
+                            </MDBModalFooter>
+                        </MDBModal>
+                    </MDBContainer>
+                    <TodoCardList items= {this.state.items}/>
 
                 </main>
             </React.Fragment>
