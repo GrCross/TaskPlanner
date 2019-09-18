@@ -26,7 +26,7 @@ export class TodoList extends React.Component {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {listItems}
+                    {listItems}
                 </TableBody>
             </Table>
         );

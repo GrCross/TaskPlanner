@@ -38,7 +38,6 @@ class TodoApp extends React.Component {
         modal6: false,
         modal7: false
     }
-
     toggle = nr => () => {
         let modalNumber = 'modal' + nr
         this.setState({
@@ -55,7 +54,7 @@ class TodoApp extends React.Component {
                 <main className="layout">
                     <MDBContainer>
                         <MDBContainer className="container">
-                            <Fab onClick={this.toggle(8)} style={{position: "absolute", left:"78%",bottom:"5%",zIndex:"10"}} color="primary" aria-label="add">
+                            <Fab onClick={this.toggle(8)} style={{position: "absolute", left:"78%",bottom:"5%",zIndex:"10"}} color="white" aria-label="add">
                                 <AddIcon />
                             </Fab>
                         </MDBContainer>
@@ -93,9 +92,6 @@ class TodoApp extends React.Component {
                                             value={this.state.dueDate}
                                             type="date"/>
                                     </FormControl>
-                                    <Button type='submit'>
-                                        Add #{this.state.items.length + 1}
-                                    </Button>
                                 </form>
                             </MDBModalBody>
                             <MDBModalFooter>

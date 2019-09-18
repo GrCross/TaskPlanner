@@ -19,9 +19,10 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Avatar from "@material-ui/core/Avatar";
 import FaceIcon from '@material-ui/icons/Face';
-import {MDBFooter} from "mdbreact";
+import {MDBBtn, MDBFooter} from "mdbreact";
 import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import Fab from "@material-ui/core/Fab";
+import {Link} from "react-router-dom";
 
 
 
@@ -107,7 +108,7 @@ export default function PersistentDrawerLeft() {
                     [classes.appBarShift]: open,
                 })}
             >
-                <Toolbar style={{backgroundColor:"#8a3310"}}>
+                <Toolbar style={{backgroundColor:"rgb(87, 16, 138)"}}>
                     <IconButton
                         color="default"
                         aria-label="open drawer"
@@ -149,6 +150,10 @@ export default function PersistentDrawerLeft() {
                         </ListItem>
                     ))}
                 </List>
+                <Divider/>
+                    <Link style={{ color: 'black',zIndex: "10"}} to={{pathname: "/"}}>
+                        <MDBBtn color="secondary">Log out</MDBBtn>
+                    </Link>
             </Drawer>
         </div>
     );

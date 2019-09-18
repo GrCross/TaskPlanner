@@ -18,8 +18,9 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {isLoggedIn: false};
-        localStorage.setItem("email","admin")
-        localStorage.setItem("password","admin")
+        localStorage.setItem("isLoggedIn","false");
+        //localStorage.setItem("email","admin")
+        //localStorage.setItem("password","admin")
     }
 
     render() {
