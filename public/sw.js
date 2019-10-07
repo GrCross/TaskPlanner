@@ -1,30 +1,45 @@
-importScripts('/cache-polyfill.js');
+const cacheName = "taskplannerapp-v1";
+const staticAssets = [
+    "/",
+    "/index.html",
+    "/manifest.json"
+];
 
+async function networkAndCache(req) {
+    const cache = await caches.open(cacheName);
+    try {
+        const fresh = await fetch(req);
+        await cache.put(req, fresh.clone());
+        return fresh;
+    } catch(e) {
+        const cached = await cache.match(req);
+        return cached;
+    }
+}
 
-self.addEventListener('install', function(e) {
-    e.waitUntil(
-        caches.open('todoApp').then(function(cache) {
-            return cache.addAll([
-                '/index.html',
-                '/login.html',
-                ''
-            ]);
-        })
-    );
+self.addEventListener("install", async e => {
+    const cache = await caches.open(cacheName);
+    await cache.addAll(staticAssets);
+    return self.skipWaiting();
 });
 
-self.addEventListener('fetch', function(event) {
-
-    console.log(event.request.url);
-
-    event.respondWith(
-
-        caches.match(event.request).then(function(response) {
-
-            return response || fetch(event.request);
-
-        })
-
-    );
-
+self.addEventListener("activate", e => {
+    self.clients.claim();
 });
+
+self.addEventListener("fetch", async e => {
+    const req = e.request;
+    const url = new URL(req.url);
+    if (url.origin === location.origin) {
+        e.respondWith(cacheFirst(req));
+    } else {
+        e.respondWith(networkAndCache(req));
+    }
+});
+
+async function cacheFirst(req) {
+    const cache = await caches.open(cacheName);
+    const cached = await cache.match(req);
+    return cached || await fetch(req);
+}
+
