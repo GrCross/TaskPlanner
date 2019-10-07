@@ -19,6 +19,7 @@ export class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            user:{},
             email: "",
             password: "",
             isLoggedIn: false,
@@ -39,6 +40,14 @@ export class Login extends React.Component {
 
     async handleSubmit(e){
         e.preventDefault()
+
+        fetch('http://localhost:8080/taskPlanner/users/'+this.state.email)
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ items: data })
+        })
+        .catch(console.log)
+
         var email = this.state.email.trim();
         var password = this.state.password.trim();
         if(!email || !password){
@@ -46,8 +55,8 @@ export class Login extends React.Component {
         }
         if (localStorage.getItem("email") === email && localStorage.getItem("password") === password) {
 
-            await this.setState({ isLoggedIn: true });
-            await this.setState({ path: "/home" });
+            this.setState({ isLoggedIn: true });
+            this.setState({ path: "/home" });
             localStorage.setItem("isLoggedIn", this.state.isLoggedIn);
         }else{
             alert("enter again the credentials");

@@ -45,6 +45,15 @@ class TodoApp extends React.Component {
         });
     }
 
+    componentDidMount() {
+        fetch('http://localhost:8080/taskPlanner/users/'+localStorage.getItem('email')+'/tasks')
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ items: data })
+        })
+        .catch(console.log)
+      }
+
 
 
     render() {
@@ -136,6 +145,24 @@ class TodoApp extends React.Component {
             priority:'',
             dueDate: ''
         }));
+
+        fetch('http://localhost:8080/taskPlanner/users/'+localStorage.getItem('email')+'/tasks', {
+			method: 'POST',
+			body: JSON.stringify({
+				text: newItem.text,
+				priority: newItem.priority,
+				dueDate: newItem.dueDate
+			}),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
+			}
+		}).then(response => {
+				return response.json()
+			}).then(json => {
+				this.setState({
+					user:json
+				});
+			});
     }
 }
 

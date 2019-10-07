@@ -69,6 +69,23 @@ export class Register extends React.Component {
         await localStorage.setItem("name", this.state.name);
         await localStorage.setItem("password", this.state.password);
 
+        fetch('http://localhost:8080/taskPlanner/users/', {
+			method: 'POST',
+			body: JSON.stringify({
+				name: this.state.name,
+				email: this.state.email,
+				password: this.state.password
+			}),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
+			}
+		}).then(response => {
+				return response.json()
+			}).then(json => {
+				this.setState({
+					user:json
+				});
+			});
 
     }
 
