@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const URL = "http://localhost:8080/taskPlanner";
+//const URL = "http://localhost:8080/taskPlanner";
+const URL = "https://todo-task-planner-back.herokuapp.com/taskPlanner"
 
 axios.defaults.baseURL = URL;
 
