@@ -12,6 +12,7 @@ import './Login.css'
 import Redirect from "react-router-dom/Redirect";
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Divider from "@material-ui/core/Divider";
+import {getUser} from "../Data-provider";
 
 
 export class Login extends React.Component {
@@ -23,7 +24,7 @@ export class Login extends React.Component {
             email: "",
             password: "",
             isLoggedIn: false,
-            path: "/"
+            path: "/",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
@@ -40,24 +41,21 @@ export class Login extends React.Component {
 
     async handleSubmit(e){
         e.preventDefault()
-
-        fetch('http://localhost:8080/taskPlanner/users/'+this.state.email)
-        .then(res => res.json())
-        .then((data) => {
-          this.setState({ items: data })
-        })
-        .catch(console.log)
-
-        var email = this.state.email.trim();
-        var password = this.state.password.trim();
+        const email = this.state.email.trim();
+        const password = this.state.password.trim();
+        const user = await getUser(email);
+        this.setState({user:user})
+        console.log(user);
         if(!email || !password){
             return;
         }
-        if (localStorage.getItem("email") === email && localStorage.getItem("password") === password) {
+        console.log(this.state.user);
+        if (user.email === email && user.password === password) {
 
             this.setState({ isLoggedIn: true });
             this.setState({ path: "/home" });
             localStorage.setItem("isLoggedIn", this.state.isLoggedIn);
+            localStorage.setItem("email",user.email);
         }else{
             alert("enter again the credentials");
         }
@@ -98,7 +96,7 @@ export class Login extends React.Component {
                                 </Link>
                             </Button>
                             <Divider/>
-                            <Button  onClick={this.handleSubmit} fullWidth variant="raised" color="primary">
+                            <Button  fullWidth variant="raised" color="primary">
                                 <Link style={{ color: 'black' }} to={{pathname:"/register"}}>
                                     Register
                                 </Link>

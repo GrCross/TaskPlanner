@@ -14,7 +14,8 @@ import TextField from "@material-ui/core/TextField";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import "../css/Todo.scss"
+import "../css/Todo.scss";
+import {getTasks} from "../Data-provider";
 
 import {
     FloatingMenu,
@@ -45,13 +46,11 @@ class TodoApp extends React.Component {
         });
     }
 
-    componentDidMount() {
-        fetch('http://localhost:8080/taskPlanner/users/'+localStorage.getItem('email')+'/tasks')
-        .then(res => res.json())
-        .then((data) => {
-          this.setState({ items: data })
-        })
-        .catch(console.log)
+    async componentDidMount() {
+        console.log(localStorage.getItem("email"))
+        const data = await getTasks(localStorage.getItem("email"));
+        this.setState({items:data});
+        console.log(this.state.items)
       }
 
 
