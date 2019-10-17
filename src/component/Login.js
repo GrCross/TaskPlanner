@@ -12,7 +12,7 @@ import './Login.css'
 import Redirect from "react-router-dom/Redirect";
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Divider from "@material-ui/core/Divider";
-import {getUser} from "../Data-provider";
+import {getUser, loginUser} from "../Data-provider";
 
 
 export class Login extends React.Component {
@@ -43,19 +43,14 @@ export class Login extends React.Component {
         e.preventDefault()
         const email = this.state.email.trim();
         const password = this.state.password.trim();
-        const user = await getUser(email);
-        this.setState({user:user})
-        console.log(user);
+        await loginUser(email,password);
         if(!email || !password){
             return;
         }
-        console.log(this.state.user);
-        if (user.email === email && user.password === password) {
+        if (localStorage.getItem('isLoggedIn') === 'true') {
 
-            this.setState({ isLoggedIn: true });
             this.setState({ path: "/home" });
-            localStorage.setItem("isLoggedIn", this.state.isLoggedIn);
-            localStorage.setItem("email",user.email);
+            localStorage.setItem("email",email);
         }else{
             alert("enter again the credentials");
         }

@@ -13,6 +13,7 @@ import Redirect from "react-router-dom/Redirect";
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Divider from "@material-ui/core/Divider";
 import {MDBAlert, MDBIcon} from "mdbreact";
+import {registerUser} from "../Data-provider";
 
 
 export class Register extends React.Component {
@@ -69,7 +70,10 @@ export class Register extends React.Component {
         await localStorage.setItem("name", this.state.name);
         await localStorage.setItem("password", this.state.password);
 
-        fetch('http://localhost:8080/taskPlanner/users/', {
+        const register = await registerUser(name,email,password);
+        console.log(register);
+
+        /*fetch('http://localhost:8080/taskPlanner/users/', {
 			method: 'POST',
 			body: JSON.stringify({
 				name: this.state.name,
@@ -85,7 +89,7 @@ export class Register extends React.Component {
 				this.setState({
 					user:json
 				});
-			});
+			});*/
 
     }
 
