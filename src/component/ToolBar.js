@@ -108,7 +108,7 @@ export default function PersistentDrawerLeft() {
                     [classes.appBarShift]: open,
                 })}
             >
-                <Toolbar style={{backgroundColor:"rgb(87, 16, 138)"}}>
+                <Toolbar style={{backgroundColor:"rgb(96, 75, 111)"}}>
                     <IconButton
                         color="default"
                         aria-label="open drawer"

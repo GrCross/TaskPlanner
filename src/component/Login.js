@@ -62,9 +62,9 @@ export class Login extends React.Component {
         return (
             <React.Fragment>
                 <CssBaseline/>
-                <div styles={{backgroundImage: `url(../Fonts/sakura.PNG)`}}>
+                <div>
                     <main className="layout">
-                        <Paper className="paperBackground">
+                        <Paper>
                             <Paper className="paperLogin">
                                 <Avatar className="avatar">
                                     <LockIcon/>

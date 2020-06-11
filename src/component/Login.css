@@ -21,7 +21,8 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-image: url("../Fonts/sakura.PNG");
+    background: blueviolet;
+
 }
 
 .avatar {
