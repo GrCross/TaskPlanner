@@ -53,8 +53,8 @@ export class TodoCard extends React.Component{
     render(){
         return (
             <MDBRow>
-                <MDBCol md="4">
-                    <MDBCard>
+                <MDBCol>
+                    <MDBCard style={{marginBottom:"20%"}}>
                         <MDBCardImage
                             className="img-responsive"
                             top

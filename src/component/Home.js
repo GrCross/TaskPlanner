@@ -5,22 +5,25 @@ import AddIcon from '@material-ui/icons/Add';
 import TodoAppModal from "./TodoAppModal";
 import TodoApp from "./TodoApp";
 import {MDBContainer} from "mdbreact";
+import sakura from "../Fonts/sakura.PNG";
+import './Login.css';
 
-
-export class Home extends React.Component{
+export class Home extends React.Component {
 
     render() {
         return (
             <div>
                 <MDBContainer>
-                    <ToolBar/>
+
+                        <ToolBar/>
+                        <TodoApp/>
+
                 </MDBContainer>
                 <MDBContainer>
-                    <TodoApp/>
+
                 </MDBContainer>
 
             </div>
-
 
 
         );

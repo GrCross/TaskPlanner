@@ -19,6 +19,7 @@ export async function loginUser(email,password) {
         password:password
     })
         .then(function (response) {
+            console.log(axios.defaults.headers)
             localStorage.setItem('isLoggedIn','true');
             localStorage.setItem('token', response.data.accessToken);
             authorization(response.data.accessToken)

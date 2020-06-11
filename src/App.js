@@ -10,7 +10,7 @@ import moment from "moment";
 import Button from "@material-ui/core/Button";
 import {LocalGasStationOutlined} from "@material-ui/icons";
 import {AppRoutes} from "./AppRoutes";
-
+//import sakura from 'Fonts/sakura.PNG'
 
 class App extends React.Component {
 
@@ -25,9 +25,9 @@ class App extends React.Component {
 
     render() {
                 return (
-            <Router>
-                <AppRoutes/>
-            </Router>
+                        <Router>
+                            <AppRoutes/>
+                        </Router>
         );
 
     }

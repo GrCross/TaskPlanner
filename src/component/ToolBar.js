@@ -19,10 +19,10 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Avatar from "@material-ui/core/Avatar";
 import FaceIcon from '@material-ui/icons/Face';
-import {MDBBtn, MDBFooter} from "mdbreact";
 import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import Fab from "@material-ui/core/Fab";
 import {Link} from "react-router-dom";
+import {MDBBtn, MDBContainer, MDBIcon, MDBModal, MDBModalBody, MDBModalFooter, MDBModalHeader} from "mdbreact";
 
 
 
@@ -121,7 +121,9 @@ export default function PersistentDrawerLeft() {
                     <Typography variant="h6" noWrap>
                         Task Planner
                     </Typography>
+
                 </Toolbar>
+
             </AppBar>
             <Drawer
                 className={classes.drawer}
@@ -134,7 +136,7 @@ export default function PersistentDrawerLeft() {
             >
                 <div className={classes.drawerHeader}>
 
-                    <Avatar className={classes.avatar} style={{right:"31%"}}>
+                    <Avatar className={classes.avatar} style={{right:"5%"}}>
                         <FaceIcon  />
                     </Avatar>
                     <Typography variant="h6"> {localStorage.getItem("email")}</Typography>
@@ -155,6 +157,7 @@ export default function PersistentDrawerLeft() {
                         <MDBBtn color="secondary">Log out</MDBBtn>
                     </Link>
             </Drawer>
+
         </div>
     );
 }

@@ -19,8 +19,10 @@ export class TodoCardList extends React.Component {
         ));
 
         return (
-            <MDBContainer>
+            <MDBContainer style={{marginTop:"20%"}}>
+                <div >
                 {listItems}
+                </div>
             </MDBContainer>
         );
     }

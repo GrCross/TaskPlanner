@@ -62,7 +62,7 @@ class TodoApp extends React.Component {
                 <main className="layout">
                     <MDBContainer>
                         <MDBContainer className="container">
-                            <Fab onClick={this.toggle(8)} style={{position: "absolute", left:"78%",bottom:"5%",zIndex:"10"}} color="white" aria-label="add">
+                            <Fab onClick={this.toggle(8)} style={{position: "fixed", left:"78%",bottom:"5%",zIndex:"10"}} color="white" aria-label="add">
                                 <AddIcon />
                             </Fab>
                         </MDBContainer>
@@ -109,7 +109,6 @@ class TodoApp extends React.Component {
                         </MDBModal>
                     </MDBContainer>
                     <TodoCardList items= {this.state.items}/>
-
                 </main>
             </React.Fragment>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Router, Switch} from "react-router-dom"
+import {Route, Router, Switch,Redirect} from "react-router-dom"
 
 import {Login} from './component/Login.js';
 import {Home} from './component/Home'
@@ -13,12 +13,14 @@ export class AppRoutes extends React.Component {
             <div>
                 <Route exact path="/" component={Login}/>
                 <Route exact path="/register" component ={Register}/>
+
                 {localStorage.getItem("isLoggedIn" ) !=="false" ?(
                     <div>
                         <Route exact path="/todo" component ={TodoApp}/>
                         <Route exact path="/home" component ={Home}/>
                     </div>
-                ):(null)}
+                ):(
+                    <Redirect to={{pathname: '/'}} />)}
             </div>
         )
 
